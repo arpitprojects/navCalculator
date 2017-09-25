@@ -1,0 +1,104 @@
+<template>
+    <div id="root-tag">
+        <v-layout row justify-space-between>
+            <v-flex xs6>
+                <v-select :items="fundNameVal" v-model="fundSel" @input="getElementNext()" label="Select Fund Name" single-line bottom></v-select>
+            </v-flex>
+            <v-flex xs3>
+                <v-select :items="OptionsVal" v-model="optionsSel" label="Select Options" single-line bottom></v-select>
+            </v-flex>
+        </v-layout>
+
+    </div>
+</template>
+
+<script>
+export default {
+    data() {
+        return {
+            results: '',
+            fundNameVal: [],
+            arrayOfString: [],
+            fundSel: null,
+            OptionsVal: [],
+            PlansVal: []
+        }
+    },
+    created: function() {
+        this.getData();
+    },
+    methods: {
+        getElementNext() {
+            // console.log(this.fundSel.text);
+            let temp_results = [], other_details = [];
+            var optionName = [];
+            let all_results = this.results;
+            for (var i = 0; i < all_results.length; i++) {
+                temp_results = all_results[i].split(' - ');
+                if (this.fundSel.text === temp_results[0]) {
+                    //console.log(temp_results);
+                    if (temp_results.length === 2) {
+                        optionName.push(temp_results[1]);
+                    } else if (temp_results.length === 3) {
+                        optionName.push(temp_results[2]);
+                        planName.push(temp_results[1]);
+
+                    } else {
+
+                    }
+                }
+            }
+
+            this.OptionsVal = optionName.unique();
+            this.PlansVal = planName.unique();
+        },
+        getData() {
+            this.$http.get('/schemeName').then(response => {
+                this.results = response.data;
+                this.nameSplit();
+            })
+        },
+        nameSplit() {
+            let schemeName = this.results;
+            let i;
+            let fundName = [];
+
+            for (i = 0; i < schemeName.length; i++) {
+                //console.log( typeof schemeName[i]);
+                //console.log(schemeName[i]);
+                schemeName[i] = schemeName[i].replace(/Plan/g, 'Plan -');
+                schemeName[i] = schemeName[i].replace(/- -/g, '-');
+                //console.log(schemeName[i]); 
+                this.arrayOfString = schemeName[i].split(' - ');
+
+                if (this.arrayOfString.length === 1) {
+                    //console.log(this.arrayOfString[0]);
+                    fundName.push(this.arrayOfString[0].trim());
+                } else if (this.arrayOfString.length === 2) {
+
+                    //console.log(this.arrayOfString[0]);
+                    fundName.push(this.arrayOfString[0].trim());
+                } else if (this.arrayOfString.length === 3) {
+                    //console.log(this.arrayOfString[0]);
+                    fundName.push(this.arrayOfString[0].trim());
+
+                } else if (this.arrayOfString.length === 4) {
+                    fundName.push(this.arrayOfString[0].trim());
+                } else { }
+
+            }
+            //console.log(fundName);
+
+            this.fundNameVal = toObject(cleanArray(fundName.unique()));//Append the fundName to the Select area
+        }
+    }//methods end
+}//export end
+
+</script>
+
+
+<style scoped>
+
+</style>
+
+The difference is scoping. var is scoped to the nearest function block and let is scoped to the nearest enclosing block

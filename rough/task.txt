@@ -1,0 +1,21 @@
+Create a simple Front end form which takes date and invested amount as a parameter and computes the investment
+ value as of today. For example, If I had invested Rs. 10,000 in Axis Long Term Equity Fund - 
+ Direct Plan on 13/May/2016, when the NAV value was 26.5481, I would have purchased 376.67 Units. 
+ That investment today would be worth Rs. 12,517 (on 15'th Jun).
+
+To achieve the above you would need to download the entire NAV history of a given fund. 
+You can download complete NAV history of a mutual fund house from here 
+http://portal.amfiindia.com/DownloadNAVHistoryReport_Po.aspx?mf=53&tp=1&frmdt=01-Apr-2015&todt=07-Aug-2017
+The URL above is for Axis Mutual fund.
+
+Constraints
+1. You can chose to work with only one Fund or one Fund house
+2. Assume all investment happened after 01-Apr-2015.
+
+Bonus Points
+1. Allow me to add as many purchase records as I can for any date in past. It should show me my current value today.
+2. Allow me to select different fund from a fixed fund house.
+
+You can chose a database to store the information or you can use a simple text file to store the NAV's. 
+The backend can be as simple as providing the information and the entire logic is in the frontend. 
+Please implement the frontend in VueJS so I can sense your grasp in VueJS.
