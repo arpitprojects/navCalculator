@@ -2,6 +2,11 @@
 
 > A simple web app to get the net asses value based on CSV data provided in  government portal(Link in question)
 
+#### Check the app @
+
+```
+https://navcalculator-tfmffxhmrz.now.sh
+```
 
 ###### Run the app
 ---
